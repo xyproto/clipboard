@@ -15,10 +15,13 @@ const (
 	wlpaste            = "wl-paste"
 	termuxClipboardGet = "termux-clipboard-get"
 	termuxClipboardSet = "termux-clipboard-set"
+	powershellExe      = "powershell.exe"
+	clipExe            = "clip.exe"
 )
 
 var (
 	Primary bool
+	trimDos bool
 
 	pasteCmdArgs []string
 	copyCmdArgs  []string
@@ -28,6 +31,9 @@ var (
 
 	xclipPasteArgs = []string{xclip, "-out", "-selection", "clipboard"}
 	xclipCopyArgs  = []string{xclip, "-in", "-selection", "clipboard"}
+
+	powershellExePasteArgs = []string{powershellExe, "Get-Clipboard"}
+	clipExeCopyArgs        = []string{clipExe}
 
 	wlpasteArgs = []string{wlpaste, "--no-newline"}
 	wlcopyArgs  = []string{wlcopy}
@@ -85,6 +91,16 @@ func init() {
 		}
 	}
 
+	pasteCmdArgs = powershellExePasteArgs
+	copyCmdArgs = clipExeCopyArgs
+	trimDos = true
+
+	if _, err := exec.LookPath(clipExe); err == nil {
+		if _, err := exec.LookPath(powershellExe); err == nil {
+			return
+		}
+	}
+
 	Unsupported = true
 }
 
@@ -119,7 +135,11 @@ func readAll() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return string(b), nil
+	result := string(b)
+	if trimDos && len(result) > 1 {
+		result = result[:len(result)-2]
+	}
+	return result, nil
 }
 
 func writeAllBytes(b []byte) error {
