@@ -7,8 +7,8 @@
 package clipboard
 
 import (
-	"os"
 	"io/ioutil"
+	"os"
 )
 
 func readAll() (string, error) {
@@ -22,7 +22,7 @@ func readAll() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	
+
 	return string(str), nil
 }
 
@@ -32,11 +32,11 @@ func writeAll(text string) error {
 		return err
 	}
 	defer f.Close()
-	
+
 	_, err = f.Write([]byte(text))
 	if err != nil {
 		return err
 	}
-	
+
 	return nil
 }

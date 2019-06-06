@@ -39,6 +39,18 @@ var (
 )
 
 func init() {
+	if WSL() {
+		pasteCmdArgs = powershellExePasteArgs
+		copyCmdArgs = clipExeCopyArgs
+		trimDos = true
+
+		if _, err := exec.LookPath(clipExe); err == nil {
+			if _, err := exec.LookPath(powershellExe); err == nil {
+				return
+			}
+		}
+	}
+
 	if os.Getenv("WAYLAND_DISPLAY") != "" {
 		pasteCmdArgs = wlpasteArgs
 		copyCmdArgs = wlcopyArgs
@@ -134,4 +146,13 @@ func writeAllBytes(b []byte) error {
 
 func writeAll(text string) error {
 	return writeAllBytes([]byte(text))
+}
+
+// WSL returns true if this is a WSL distro
+func WSL() bool {
+	// the official way to detect a WSL distro
+	// ref: https://github.com/microsoft/WSL/issues/423
+	cmd := exec.Command("/bin/sh", "-c", "cat /proc/version | grep -o Microsoft")
+	_, err := cmd.Output()
+	return err == nil
 }
