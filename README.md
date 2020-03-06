@@ -1,48 +1,44 @@
-[![Build Status](https://travis-ci.org/atotto/clipboard.svg?branch=master)](https://travis-ci.org/atotto/clipboard)
-
-[![GoDoc](https://godoc.org/github.com/atotto/clipboard?status.svg)](http://godoc.org/github.com/atotto/clipboard)
+[![Build Status](https://travis-ci.com/xyproto/clip.svg?branch=master)](https://travis-ci.com/xyproto/clip) [![GoDoc](https://godoc.org/github.com/xyproto/clip?status.svg)](http://godoc.org/github.com/xyproto/clip)
 
 # Clipboard for Go
 
-Provide copying and pasting to the Clipboard for Go.
+This is a fork of [clipboard](https://github.com/atotto/clipboard) (which is licensed under the "BSD 3-clause" license).
 
-Build:
+The goal is to provide functionality for copying from and pasting to the clipboard, while also merging in most pull requests that `atotto/clipboard` has received.
 
-    $ go get github.com/atotto/clipboard
+### Build
 
-Platforms:
+    $ go get -u github.com/xyproto/clip
 
-* OSX
-* Windows 7 (probably work on other Windows)
-* Linux, Unix (requires 'xclip' or 'xsel' command to be installed)
+### Platforms
 
+* macOS
+* Windows 7 (probably works on later editions too)
+* Linux, Unix (requires `xclip` and `xsel` to be installed (or `wlpaste` and `wlcopy`, for Wayland)
 
-Document: 
+### Online documentation
 
-* http://godoc.org/github.com/atotto/clipboard
+* http://godoc.org/github.com/xyproto/clip
 
-Notes:
+### Notes
 
-* Text string only
-* UTF-8 text encoding only (no conversion)
+* For functions that takes or return a string, only UTF-8 is supported.
 
-TODO:
+## Commands
 
-* Clipboard watcher(?)
+Paste shell command:
 
-## Commands:
-
-paste shell command:
-
-    $ go get github.com/atotto/clipboard/cmd/gopaste
+    $ go get -u github.com/xyproto/clip/cmd/gopaste
     $ # example:
     $ gopaste > document.txt
 
-copy shell command:
+Copy shell command:
 
-    $ go get github.com/atotto/clipboard/cmd/gocopy
+    $ go get -u github.com/xyproto/clip/cmd/gocopy
     $ # example:
     $ cat document.txt | gocopy
 
+### General info
 
-
+* Version: 0.1.0
+* License: BSD

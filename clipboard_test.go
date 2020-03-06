@@ -1,13 +1,9 @@
-// Copyright 2013 @atotto. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-package clipboard_test
+package clip_test
 
 import (
 	"testing"
 
-	. "github.com/atotto/clipboard"
+	. "github.com/xyproto/clip"
 )
 
 func TestCopyAndPaste(t *testing.T) {
@@ -25,6 +21,37 @@ func TestCopyAndPaste(t *testing.T) {
 
 	if actual != expected {
 		t.Errorf("want %s, got %s", expected, actual)
+	}
+}
+
+func TestCopyAndPasteBytes(t *testing.T) {
+	expected := []byte{0, 1, 2, 3, 4, 5, 6, 7}
+
+	err := WriteAllBytes(expected)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	actual, err := ReadAllBytes()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	min := func(a, b int) int {
+		if a < b {
+			return a
+		}
+		return b
+	}
+
+	// For testing the test
+	// expected[0] = 42
+
+	for i := 0; i < min(len(actual), len(expected)); i++ {
+		if actual[i] != expected[i] {
+			t.Errorf("want %s, got %s", expected, actual)
+			break
+		}
 	}
 }
 
@@ -69,5 +96,19 @@ func BenchmarkWriteAll(b *testing.B) {
 	text := "いろはにほへと"
 	for i := 0; i < b.N; i++ {
 		WriteAll(text)
+	}
+}
+
+func BenchmarkReadAllBytes(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		ReadAllBytes()
+	}
+}
+
+var bs = []byte("いろはにほへと")
+
+func BenchmarkWriteAllBytes(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		WriteAllBytes(bs)
 	}
 }
