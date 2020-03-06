@@ -1,4 +1,4 @@
-// Package clip and read from and write to the clipboard
+// Package clip can be used for reading from and writing to the clipboard
 package clip
 
 // ReadAll will read a string from the clipboard
