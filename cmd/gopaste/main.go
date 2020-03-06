@@ -7,10 +7,9 @@ import (
 )
 
 func main() {
-	text, err := clipboard.ReadAll()
+	text, err := clip.ReadAll()
 	if err != nil {
 		panic(err)
 	}
-
 	fmt.Print(text)
 }
