@@ -1,9 +1,5 @@
-// Copyright 2013 @atotto. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
-// Package clipboard read/write on clipboard
-package clipboard
+// Package clip and read from and write to the clipboard
+package clip
 
 // ReadAll will read a string from the clipboard
 func ReadAll() (string, error) {

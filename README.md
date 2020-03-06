@@ -1,14 +1,14 @@
-[![Build Status](https://travis-ci.org/atotto/clipboard.svg?branch=master)](https://travis-ci.org/atotto/clipboard)
-
-[![GoDoc](https://godoc.org/github.com/atotto/clipboard?status.svg)](http://godoc.org/github.com/atotto/clipboard)
+[![Build Status](https://travis-ci.com/xyproto/clip.svg?branch=master)](https://travis-ci.com/xyproto/clip) [![GoDoc](https://godoc.org/github.com/xyproto/clip?status.svg)](http://godoc.org/github.com/xyproto/clip)
 
 # Clipboard for Go
 
-Provide functionality for copying from and pasting to the clipboard.
+This is a fork of [clipboard](https://github.com/atotto/clipboard) (which is licensed under the "BSD 3-clause" license).
+
+The goal is to provide functionality for copying from and pasting to the clipboard, while also merging in most pull requests that `atotto/clipboard` has received.
 
 ### Build
 
-    $ go get -u github.com/atotto/clipboard
+    $ go get -u github.com/xyproto/clip
 
 ### Platforms
 
@@ -16,28 +16,29 @@ Provide functionality for copying from and pasting to the clipboard.
 * Windows 7 (probably works on later editions too)
 * Linux, Unix (requires `xclip` and `xsel` to be installed (or `wlpaste` and `wlcopy`, for Wayland)
 
-### Documentation
+### Online documentation
 
-* http://godoc.org/github.com/atotto/clipboard
+* http://godoc.org/github.com/xyproto/clip
 
 ### Notes
 
-* For functions that takes or return a string, only UTF-8 is supported
-
-### TODO
-
-- [ ] Clipboard watcher(?)
+* For functions that takes or return a string, only UTF-8 is supported.
 
 ## Commands
 
-paste shell command:
+Paste shell command:
 
-    $ go get -u github.com/atotto/clipboard/cmd/gopaste
+    $ go get -u github.com/xyproto/clip/cmd/gopaste
     $ # example:
     $ gopaste > document.txt
 
-copy shell command:
+Copy shell command:
 
-    $ go get -u github.com/atotto/clipboard/cmd/gocopy
+    $ go get -u github.com/xyproto/clip/cmd/gocopy
     $ # example:
     $ cat document.txt | gocopy
+
+### General info
+
+* Version: 0.1.0
+* License: BSD

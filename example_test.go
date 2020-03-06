@@ -1,14 +1,14 @@
-package clipboard_test
+package clip_test
 
 import (
 	"fmt"
 
-	"github.com/atotto/clipboard"
+	"github.com/xyproto/clip"
 )
 
 func Example() {
-	clipboard.WriteAll("日本語")
-	text, _ := clipboard.ReadAll()
+	clip.WriteAll("日本語")
+	text, _ := clip.ReadAll()
 	fmt.Println(text)
 
 	// Output:
