@@ -6,6 +6,10 @@ This is a fork of [clipboard](https://github.com/atotto/clipboard) (which is lic
 
 The goal is to provide functionality for copying from and pasting to the clipboard, while also merging in most pull requests that `atotto/clipboard` has received.
 
+### Requirements
+
+* Go 1.13 or later
+
 ### Build
 
     $ go get -u github.com/xyproto/clip
