@@ -127,6 +127,7 @@ func readAllBytes() ([]byte, error) {
 	if err != nil {
 		return []byte{}, errors.New("could not run: " + pasteCmd.String())
 	}
+	pasteCmd.Wait()
 	return out, nil
 }
 
