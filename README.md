@@ -45,4 +45,4 @@ Copy shell command:
 ### General info
 
 * Version: 0.3.2
-* License: MIT
+* License: BSD-3
