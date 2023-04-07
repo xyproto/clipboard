@@ -11,25 +11,26 @@ env:
 
 jobs:
   test:
-    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
         go-version: [1.17.x, 1.18.x, 1.19.x, 1.20.x]
+    runs-on: ${{ matrix.os }}
     steps:
-    - name: Install dependencies
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y xvfb xclip
-    - name: Install Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: ${{ matrix.go-version }}
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Start xvfb
-      if: matrix.os == 'ubuntu-latest'
-      run: xvfb-run --auto-servernum --server-args="-screen 0 1280x1024x24" go test ./...
-      else:
-      run: go test ./...
+      - name: Install dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb xclip
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Start xvfb
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          xvfb-run --auto-servernum --server-args="-screen 0 1280x1024x24" go test ./...
+        else:
+          run: go test ./...
