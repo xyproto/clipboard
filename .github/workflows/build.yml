@@ -14,6 +14,8 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: ${{ matrix.go-version }}
+    - name: Install xclip
+      run: sudo apt-get install -y xclip
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Test
@@ -25,7 +27,9 @@ jobs:
     - name: Install Go
       uses: actions/setup-go@v2
       with:
-        go-version: 1.19.x
+        go-version: 1.20.x
+    - name: Install xclip
+      run: sudo apt-get install -y xclip
     - name: Checkout code
       uses: actions/checkout@v2
     - uses: actions/cache@v2
