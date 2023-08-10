@@ -9,12 +9,12 @@ import (
 func TestCopyAndPaste(t *testing.T) {
 	expected := "日本語"
 
-	err := WriteAll(expected)
+	err := WriteAll(expected, false)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	actual, err := ReadAll()
+	actual, err := ReadAll(false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -27,12 +27,12 @@ func TestCopyAndPaste(t *testing.T) {
 func TestCopyAndPasteBytes(t *testing.T) {
 	expected := []byte{0, 1, 2, 3, 4, 5, 6, 7}
 
-	err := WriteAllBytes(expected)
+	err := WriteAllBytes(expected, false)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	actual, err := ReadAllBytes()
+	actual, err := ReadAllBytes(false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -59,12 +59,12 @@ func TestMultiCopyAndPaste(t *testing.T) {
 	expected1 := "French: éèêëàùœç"
 	expected2 := "Weird UTF-8: 💩☃"
 
-	err := WriteAll(expected1)
+	err := WriteAll(expected1, false)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	actual1, err := ReadAll()
+	actual1, err := ReadAll(false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -72,12 +72,12 @@ func TestMultiCopyAndPaste(t *testing.T) {
 		t.Errorf("want %s, got %s", expected1, actual1)
 	}
 
-	err = WriteAll(expected2)
+	err = WriteAll(expected2, false)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	actual2, err := ReadAll()
+	actual2, err := ReadAll(false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -88,20 +88,20 @@ func TestMultiCopyAndPaste(t *testing.T) {
 
 func BenchmarkReadAll(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		ReadAll()
+		ReadAll(false)
 	}
 }
 
 func BenchmarkWriteAll(b *testing.B) {
 	text := "いろはにほへと"
 	for i := 0; i < b.N; i++ {
-		WriteAll(text)
+		WriteAll(text, false)
 	}
 }
 
 func BenchmarkReadAllBytes(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		ReadAllBytes()
+		ReadAllBytes(false)
 	}
 }
 
@@ -109,6 +109,6 @@ var bs = []byte("いろはにほへと")
 
 func BenchmarkWriteAllBytes(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		WriteAllBytes(bs)
+		WriteAllBytes(bs, false)
 	}
 }

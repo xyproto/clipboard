@@ -7,8 +7,8 @@ import (
 )
 
 func Example() {
-	clip.WriteAll("日本語")
-	text, _ := clip.ReadAll()
+	clip.WriteAll("日本語", false)
+	text, _ := clip.ReadAll(false)
 	fmt.Println(text)
 
 	// Output:
